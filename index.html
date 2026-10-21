@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Descubrí diez juegos tradicionales argentinos, sus historias y reglas.">
+  <title>Tradición Argentina | Juegos de ayer y de siempre</title>
+  <style>
+    :root {
+      --celeste: #78c9e8;
+      --celeste-oscuro: #176b8a;
+      --azul: #123c52;
+      --crema: #fffaf0;
+      --papel: #fffdf8;
+      --rojo: #a94837;
+      --verde: #536d4e;
+      --tinta: #24343b;
+      --sombra: 0 12px 30px rgba(18, 60, 82, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--tinta);
+      background: var(--crema);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.6;
+    }
+    button, input { font: inherit; }
+    a { color: inherit; }
+    .top-stripe {
+      height: 9px;
+      background: linear-gradient(to bottom, #78c9e8 0 33%, #fff 33% 66%, #78c9e8 66%);
+    }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(255,253,248,.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e7e0d2;
+    }
+    .nav {
+      width: min(1120px, 92%); margin: auto; min-height: 74px;
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: grid; place-items: center; background: var(--celeste);
+      border: 2px solid var(--azul); font-size: 23px;
+    }
+    .brand strong { display: block; color: var(--azul); font-size: 1.08rem; line-height: 1.15; }
+    .brand small { display: block; color: #66777b; font: 11px/1.5 Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+    nav { display: flex; gap: 22px; align-items: center; }
+    nav a { text-decoration: none; font: 600 .92rem Arial, sans-serif; color: var(--azul); }
+    nav a:hover { color: var(--rojo); }
+    .hero {
+      position: relative; overflow: hidden;
+      background: linear-gradient(115deg, rgba(13,53,72,.93), rgba(23,107,138,.78)),
+        radial-gradient(ellipse at 80% 15%, #d5edee, transparent 35%),
+        linear-gradient(#8ecfe5, #f3d9a2);
+      color: white; padding: 92px 0 86px;
+    }
+    .hero::before, .hero::after {
+      content: ""; position: absolute; pointer-events: none;
+      border: 1px solid rgba(255,255,255,.18); border-radius: 50%;
+      width: 470px; height: 470px; right: -110px; top: -190px;
+    }
+    .hero::after { width: 600px; height: 600px; right: -175px; top: -250px; }
+    .hero-inner { position: relative; z-index: 1; width: min(1120px, 92%); margin: auto; }
+    .eyebrow { font: 700 .76rem Arial, sans-serif; text-transform: uppercase; letter-spacing: .17em; color: #c5efff; }
+    h1 { font-size: clamp(2.7rem, 7vw, 5.2rem); line-height: .99; max-width: 750px; margin: 18px 0; letter-spacing: -.04em; }
+    h1 span { color: #9cdef5; font-style: italic; }
+    .hero p { max-width: 590px; font-size: 1.12rem; color: #edf8fb; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .btn {
+      border: 0; border-radius: 999px; padding: 12px 20px; cursor: pointer;
+      font: 700 .92rem Arial, sans-serif; text-decoration: none; display: inline-flex;
+      align-items: center; justify-content: center; transition: transform .2s, background .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-light { background: white; color: var(--azul); }
+    .btn-outline { border: 1px solid rgba(255,255,255,.65); color: white; background: transparent; }
+    .hero-note { margin-top: 32px; font-size: .85rem !important; color: #d4eaf1 !important; }
+    .section { width: min(1120px, 92%); margin: auto; padding: 72px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+    .section-head h2 { color: var(--azul); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.08; margin: 8px 0; }
+    .section-head p { max-width: 520px; margin: 0; color: #647277; }
+    .kicker { color: var(--rojo); font: 700 .75rem Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+    .search-row { display: flex; gap: 12px; margin: 0 0 26px; flex-wrap: wrap; }
+    .search-box { flex: 1; min-width: 230px; position: relative; }
+    .search-box span { position: absolute; left: 15px; top: 11px; font-size: 1.1rem; }
+    .search-box input {
+      width: 100%; padding: 13px 16px 13px 43px; border: 1px solid #d8d7cc;
+      background: white; border-radius: 12px; outline: none; color: var(--tinta);
+    }
+    .search-box input:focus { border-color: var(--celeste-oscuro); box-shadow: 0 0 0 3px #78c9e833; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter {
+      padding: 10px 14px; border: 1px solid #d8d7cc; background: transparent;
+      border-radius: 999px; cursor: pointer; color: var(--azul); font: 600 .85rem Arial, sans-serif;
+    }
+    .filter.active, .filter:hover { background: var(--azul); border-color: var(--azul); color: white; }
+    .games-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .game-card {
+      background: var(--papel); border: 1px solid #e8e0d2; border-radius: 17px;
+      overflow: hidden; box-shadow: 0 4px 14px rgba(18,60,82,.04);
+      transition: transform .22s, box-shadow .22s; display: flex; flex-direction: column;
+    }
+    .game-card:hover { transform: translateY(-4px); box-shadow: var(--sombra); }
+    .card-art {
+      min-height: 142px; display: grid; place-items: center; position: relative;
+      background: linear-gradient(135deg, #d8edf1, #f5e8c9); overflow: hidden;
+    }
+    .card-art::before { content: ""; position: absolute; width: 180px; height: 180px; border: 1px solid #ffffffa8; border-radius: 50%; }
+    .card-art::after { content: ""; position: absolute; width: 130px; height: 130px; border: 1px solid #ffffffa8; border-radius: 50%; }
+    .game-icon { font-size: 4rem; z-index: 1; filter: drop-shadow(0 5px 2px #153a4920); }
+    .card-number { position: absolute; top: 13px; left: 15px; font: 700 .75rem Arial, sans-serif; color: #456875; letter-spacing: .1em; }
+    .category-tag { position: absolute; bottom: 12px; right: 12px; z-index: 2; padding: 5px 9px; border-radius: 99px; background: #ffffffd9; color: var(--azul); font: 700 .67rem Arial, sans-serif; }
+    .card-body { padding: 19px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+    .card-body h3 { color: var(--azul); margin: 0 0 8px; font-size: 1.4rem; }
+    .card-body p { color: #5f6d70; font-size: .94rem; margin: 0 0 17px; flex: 1; }
+    .card-bottom { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .card-meta { font: 700 .73rem Arial, sans-serif; color: #7b8584; }
+    .details-btn { border: 0; background: none; color: var(--rojo); font: 700 .86rem Arial, sans-serif; cursor: pointer; padding: 6px 0; }
+    .details-btn:hover { text-decoration: underline; }
+    .empty-state { display: none; padding: 35px; text-align: center; color: #65777a; background: white; border-radius: 16px; border: 1px dashed #ccd4d1; }
+    .quote-band { background: #e4f3f7; border-top: 1px solid #c8e7ef; border-bottom: 1px solid #c8e7ef; }
+    .quote-inner { width: min(900px, 90%); margin: auto; padding: 42px 0; text-align: center; }
+    .quote-inner blockquote { font-size: clamp(1.35rem, 3vw, 2rem); font-style: italic; line-height: 1.35; color: var(--azul); margin: 0 0 10px; }
+    .quote-inner p { margin: 0; color: #5c777e; font: 700 .75rem Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+    .quiz-section { background: #123c52; color: white; }
+    .quiz-wrap { width: min(820px, 92%); margin: auto; padding: 74px 0; }
+    .quiz-wrap .kicker { color: #9cdef5; }
+    .quiz-wrap h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin: 9px 0 12px; }
+    .quiz-intro { color: #d4e7ec; margin: 0 0 28px; }
+    .quiz-box { background: #fffdf8; color: var(--tinta); padding: clamp(20px, 4vw, 36px); border-radius: 18px; }
+    .quiz-progress { display: flex; justify-content: space-between; gap: 12px; font: 700 .78rem Arial, sans-serif; color: #62777e; margin-bottom: 10px; }
+    .progress-track { height: 7px; background: #e6ecea; border-radius: 99px; overflow: hidden; margin-bottom: 25px; }
+    .progress-fill { height: 100%; width: 0; background: var(--celeste-oscuro); transition: width .3s; }
+    .quiz-box h3 { color: var(--azul); font-size: 1.4rem; margin: 0 0 18px; }
+    .answers { display: grid; gap: 10px; }
+    .answer {
+      width: 100%; text-align: left; border: 1px solid #d9e0dc; border-radius: 11px;
+      background: white; padding: 13px 15px; cursor: pointer; color: var(--tinta);
+      transition: border .2s, background .2s;
+    }
+    .answer:hover:not(:disabled) { border-color: var(--celeste-oscuro); background: #f0faff; }
+    .answer:disabled { cursor: default; }
+    .answer.correct { border-color: #47845b; background: #e8f5e9; }
+    .answer.wrong { border-color: #bd5547; background: #fff0ed; }
+    .feedback { min-height: 28px; margin: 14px 0 0; font-size: .93rem; color: #596b70; }
+    .quiz-controls { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 18px; }
+    .btn-blue { background: var(--azul); color: white; }
+    .btn-blue:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+    .result { text-align: center; padding: 15px 0; }
+    .result .result-emoji { font-size: 3.5rem; }
+    .result h3 { font-size: 2rem; margin: 10px 0; }
+    .result p { color: #5f6d70; }
+    .about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 35px; align-items: center; }
+    .about-grid h2 { color: var(--azul); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.08; margin: 8px 0 15px; }
+    .about-grid p { color: #5f6d70; }
+    .fact-box { padding: 26px; background: white; border: 1px solid #e8e0d2; border-radius: 16px; }
+    .fact-box strong { color: var(--azul); display: block; margin-bottom: 7px; }
+    .fact-box p { margin: 0 0 18px; font-size: .94rem; }
+    .fact-box p:last-child { margin-bottom: 0; }
+    footer { background: #0d2c3b; color: #d7e6e9; padding: 28px 0; }
+    .footer-inner { width: min(1120px, 92%); margin: auto; display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; font-size: .86rem; }
+    .footer-inner strong { color: white; }
+    .modal { position: fixed; inset: 0; background: rgba(6,25,34,.72); z-index: 30; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .modal.open { display: flex; }
+    .modal-panel { background: var(--papel); width: min(620px, 100%); max-height: 88vh; overflow: auto; border-radius: 18px; padding: 27px; box-shadow: 0 25px 70px #0004; }
+    .modal-head { display: flex; justify-content: space-between; align-items: start; gap: 15px; }
+    .modal-head h2 { color: var(--azul); margin: 0; font-size: 2rem; }
+    .close-modal { border: 0; background: #eaf2f2; color: var(--azul); border-radius: 50%; width: 38px; height: 38px; font-size: 1.3rem; cursor: pointer; flex-shrink: 0; }
+    .modal-icon { font-size: 3.5rem; margin: 10px 0; }
+    .modal-panel h3 { color: var(--azul); margin-bottom: 5px; }
+    .modal-panel p, .modal-panel li { color: #59696c; }
+    .modal-panel ul { padding-left: 22px; }
+    .disclaimer { font-size: .85rem; padding: 12px 14px; background: #f8f0df; border-radius: 10px; color: #6c5940 !important; }
+    @media (max-width: 850px) {
+      nav { gap: 12px; } nav a { font-size: .82rem; }
+      .games-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .nav { padding: 10px 0; align-items: flex-start; }
+      nav { display: none; }
+      .hero { padding: 65px 0 60px; }
+      .section { padding: 52px 0; }
+      .section-head { display: block; }
+      .games-grid { grid-template-columns: 1fr; }
+      .card-art { min-height: 125px; }
+      .quiz-wrap { padding: 54px 0; }
+      .quiz-controls { align-items: stretch; }
+      .quiz-controls .btn { flex: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-stripe" aria-hidden="true"></div>
+  <header>
+    <div class="nav">
+      <a class="brand" href="#inicio" aria-label="Tradición Argentina, ir al inicio">
+        <span class="brand-mark" aria-hidden="true">☀</span>
+        <span><strong>Tradición Argentina</strong><small>Juegos de ayer y de siempre</small></span>
+      </a>
+      <nav aria-label="Navegación principal">
+        <a href="#juegos">Los juegos</a>
+        <a href="#historia">La tradición</a>
+        <a href="#quiz">Ponete a prueba</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-inner">
+        <div class="eyebrow">🇦🇷 Nuestra cultura · Nuestra historia</div>
+        <h1>Jugar también es <span>tradición.</span></h1>
+        <p>Del campo a la vereda, estos juegos nos conectan con las costumbres argentinas. Conocé sus historias, descubrí cómo se juegan y poné a prueba lo que aprendiste.</p>
+        <div class="hero-actions">
+          <a class="btn btn-light" href="#juegos">Explorar los 10 juegos ↓</a>
+          <a class="btn btn-outline" href="#quiz">Hacer el quiz</a>
+        </div>
+        <p class="hero-note">Una colección para aprender, compartir y mantener vivas nuestras tradiciones.</p>
+      </div>
+    </section>
+
+    <section class="section" id="juegos">
+      <div class="section-head">
+        <div>
+          <div class="kicker">La colección</div>
+          <h2>Juegos para recordar<br>y volver a jugar.</h2>
+        </div>
+        <p>Algunos nacieron en el ámbito rural y otros se transmitieron en patios, plazas y veredas. Elegí uno para conocerlo mejor.</p>
+      </div>
+
+      <div class="search-row">
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="Buscar un juego..." aria-label="Buscar un juego por nombre o descripción">
+        </label>
+        <div class="filters" aria-label="Filtrar por categoría">
+          <button class="filter active" data-filter="todos" type="button">Todos</button>
+          <button class="filter" data-filter="gaucho" type="button">Juegos gauchos</button>
+          <button class="filter" data-filter="patio" type="button">Patio y calle</button>
+        </div>
+      </div>
+
+      <div class="games-grid" id="gamesGrid" aria-live="polite"></div>
+      <div class="empty-state" id="emptyState">No encontramos juegos con esa búsqueda. Probá con otra palabra.</div>
+    </section>
+
+    <section class="quote-band">
+      <div class="quote-inner">
+        <blockquote>“Las tradiciones viven cuando alguien las comparte.”</blockquote>
+        <p>Aprender · Jugar · Transmitir</p>
+      </div>
+    </section>
+
+    <section class="quiz-section" id="quiz">
+      <div class="quiz-wrap">
+        <div class="kicker">Desafío criollo</div>
+        <h2>¿Cuánto sabés de nuestros juegos?</h2>
+        <p class="quiz-intro">Respondé las preguntas y descubrí tu puntaje. ¡No hace falta saber todo de entrada!</p>
+        <div class="quiz-box" id="quizBox">
+          <div class="quiz-progress">
+            <span id="questionCounter">Pregunta 1 de 5</span>
+            <span id="scoreCounter">Puntos: 0</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <h3 id="questionText"></h3>
+          <div class="answers" id="answers"></div>
+          <p class="feedback" id="feedback" aria-live="polite"></p>
+          <div class="quiz-controls">
+            <span id="answeredHint" class="card-meta">Elegí una respuesta</span>
+            <button class="btn btn-blue" id="nextBtn" type="button" disabled>Siguiente →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="historia">
+      <div class="about-grid">
+        <div>
+          <div class="kicker">Raíces que compartimos</div>
+          <h2>Un pedacito de Argentina en cada juego.</h2>
+          <p>Los juegos tradicionales no son todos iguales en cada región ni se practican siempre con las mismas reglas. Cambian con el tiempo, con las familias y con las comunidades que los mantienen vivos.</p>
+          <p>Esta página es una puerta de entrada: preguntá a tus abuelos, docentes o vecinos cómo los jugaban y qué recuerdos tienen. ¡Cada historia suma!</p>
+        </div>
+        <aside class="fact-box">
+          <strong>🌾 Tradición rural</strong>
+          <p>La taba, la sortija, el pato y la pialada se relacionan con distintas prácticas y celebraciones del ámbito gaucho.</p>
+          <strong>🪁 Juegos populares</strong>
+          <p>La rayuela, el balero, las canicas, la payana y el barrilete se disfrutan con reglas sencillas y materiales muy distintos.</p>
+          <strong>🤝 Una nota importante</strong>
+          <p>Algunas prácticas tradicionales, como el pato histórico o las destrezas con animales, evolucionaron y hoy tienen reglas y consideraciones de seguridad específicas.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div><strong>Tradición Argentina</strong> · Juegos de ayer y de siempre</div>
+      <div>Hecho para aprender y compartir 🇦🇷</div>
+    </div>
+  </footer>
+
+  <div class="modal" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <div class="kicker" id="modalCategory">Juego tradicional</div>
+          <h2 id="modalTitle">Nombre del juego</h2>
+        </div>
+        <button class="close-modal" id="closeModal" type="button" aria-label="Cerrar">×</button>
+      </div>
+      <div class="modal-icon" id="modalIcon" aria-hidden="true"></div>
+      <p id="modalDescription"></p>
+      <h3>¿Cómo se juega?</h3>
+      <p id="modalHow"></p>
+      <h3>¿Qué necesitás?</h3>
+      <p id="modalMaterials"></p>
+      <p class="disclaimer" id="modalNote"></p>
+    </div>
+  </div>
+
+  <script>
+    const games = [
+      {
+        id: "truco", name: "El truco", category: "gaucho", label: "Juego de cartas",
+        icon: "🃏", age: "Para compartir en grupo",
+        short: "Un clásico juego de cartas en el que importan las señas, la estrategia y el engaño amistoso.",
+        description: "El truco es uno de los juegos de cartas más populares de Argentina y de otros países de la región. Tiene variantes y códigos propios según el lugar y el grupo.",
+        how: "Se juega con cartas españolas y, según la variante, participan dos, cuatro o seis personas. Los jugadores intentan ganar rondas usando el valor especial de las cartas y pueden cantar apuestas como truco, retruco y vale cuatro.",
+        materials: "Un mazo español adecuado para el truco y una mesa o superficie cómoda.",
+        note: "Las reglas y el sistema de señas pueden variar. Acordá la variante antes de empezar."
+      },
+      {
+        id: "taba", name: "La taba", category: "gaucho", label: "Destreza criolla",
+        icon: "🦴", age: "Juego tradicional rural",
+        short: "Un juego criollo de lanzamiento cuyo resultado depende de cómo cae una pieza llamada taba.",
+        description: "La taba tiene una larga asociación con las reuniones rurales y las costumbres gauchas. Tradicionalmente se utiliza una pieza ósea preparada para el juego.",
+        how: "En su forma tradicional, se lanza la taba sobre una cancha de tierra y se observa de qué lado cae. Las condiciones del terreno y las reglas acordadas determinan cómo se interpreta el resultado.",
+        materials: "Una taba de juego y un terreno preparado, siempre con una zona despejada y segura.",
+        note: "En algunas versiones se vinculó con apuestas. Para una actividad escolar, conviene practicar sin dinero y con supervisión adulta."
+      },
+      {
+        id: "sortija", name: "La sortija", category: "gaucho", label: "Fiesta tradicional",
+        icon: "💍", age: "Destreza ecuestre",
+        short: "Una prueba tradicional de precisión en la que se intenta ensartar una pequeña sortija.",
+        description: "La carrera de sortija es una destreza criolla que suele aparecer en fiestas tradicionalistas y celebraciones del campo.",
+        how: "En la versión ecuestre, una persona pasa a caballo por debajo de un arco y trata de retirar con una varilla una sortija pequeña suspendida. Hay variantes recreativas adaptadas para otros contextos.",
+        materials: "En la versión tradicional: arco, sortija y varilla apropiada. Para una versión escolar, se puede adaptar con un aro grande y una varilla blanda.",
+        note: "La versión a caballo requiere personas capacitadas, equipamiento adecuado, espacio controlado y medidas de bienestar animal."
+      },
+      {
+        id: "pato", name: "El pato", category: "gaucho", label: "Deporte nacional",
+        icon: "🐎", age: "Deporte ecuestre",
+        short: "Un deporte ecuestre argentino que combina habilidad a caballo, pases y trabajo en equipo.",
+        description: "El pato es el deporte nacional argentino. Su historia se remonta a prácticas rurales antiguas, pero el juego actual tiene reglas deportivas organizadas y equipamiento específico.",
+        how: "Dos equipos de jinetes compiten por llevar una pelota con asas y marcar tantos en el arco rival, respetando reglas de juego y seguridad.",
+        materials: "Caballos entrenados, pelota reglamentaria con asas, cancha y equipamiento de protección, dentro de una institución preparada.",
+        note: "No intentes practicarlo sin entrenamiento ni supervisión: es un deporte ecuestre de contacto y requiere organización profesional."
+      },
+      {
+        id: "pialada", name: "La pialada", category: "gaucho", label: "Destreza de campo",
+        icon: "🪢", age: "Práctica tradicional",
+        short: "Una destreza gaucha con lazo, ligada históricamente al trabajo rural con ganado.",
+        description: "La pialada forma parte de las destrezas criollas y del conocimiento del lazo. En el ámbito rural tradicional se relaciona con tareas de manejo de ganado.",
+        how: "En demostraciones tradicionalistas, personas con experiencia muestran técnicas de lazo bajo reglas específicas. No es una actividad adecuada para improvisar ni para aprender sin instructores.",
+        materials: "Lazo y espacio preparado, únicamente en una demostración organizada por personas capacitadas.",
+        note: "Por seguridad y bienestar animal, no practiques con animales. Para aprender en la escuela, podés hacer un juego de precisión con aros y conos."
+      },
+      {
+        id: "rayuela", name: "La rayuela", category: "patio", label: "Juego de patio",
+        icon: "🟦", age: "Ideal para jugar al aire libre",
+        short: "Un recorrido de casilleros dibujados en el piso que se completa saltando en uno o dos pies.",
+        description: "La rayuela se juega en muchos países y tiene distintas formas de dibujar el tablero y de contar los turnos.",
+        how: "Se dibujan casilleros numerados. Cada participante tira una piedrita a una casilla y recorre el dibujo saltando sin pisar las líneas ni la casilla marcada; luego vuelve a recoger la piedra.",
+        materials: "Tiza, una piedrita plana y una superficie nivelada que no sea resbaladiza.",
+        note: "Elegí un lugar lejos del tránsito y revisá que el piso esté seco y despejado."
+      },
+      {
+        id: "balero", name: "El balero", category: "patio", label: "Juego de habilidad",
+        icon: "🪀", age: "Coordinación y paciencia",
+        short: "Un juguete de copa y bola unidas por una cuerda: el desafío es encajar la bola con un movimiento.",
+        description: "El balero es un juguete tradicional de habilidad manual que existe con distintos diseños en América Latina.",
+        how: "Se sostiene el mango y se balancea la bola con cuidado para intentar que entre en la copa o encaje en el extremo, según el modelo. Se puede practicar contando aciertos.",
+        materials: "Un balero adecuado a la edad, preferentemente de material resistente y sin piezas dañadas.",
+        note: "Usalo con espacio alrededor y no lo hagas girar cerca de la cara de otras personas."
+      },
+      {
+        id: "canicas", name: "Las canicas", category: "patio", label: "Juego de bolitas",
+        icon: "🔵", age: "Para jugar por turnos",
+        short: "Pequeñas bolitas de vidrio o material similar que se usan en juegos de puntería y estrategia.",
+        description: "Las canicas, también llamadas bolitas, tienen muchísimas variantes. Las reglas pueden cambiar de un barrio a otro.",
+        how: "Una modalidad consiste en dibujar un círculo en el suelo y tratar de sacar las canicas del círculo con un tiro controlado de otra bolita. Antes de empezar, acuerden si las canicas se devuelven al final.",
+        materials: "Canicas y una superficie plana, con límites claros para el área de juego.",
+        note: "Las canicas pueden causar atragantamiento. Guardalas fuera del alcance de niños pequeños y no te las lleves a la boca."
+      },
+      {
+        id: "payana", name: "La payana", category: "patio", label: "Juego de manos",
+        icon: "🪨", age: "Coordinación y reflejos",
+        short: "Un juego de destreza manual en el que se recogen piedritas siguiendo una secuencia.",
+        description: "La payana se juega con piedritas pequeñas y se conoce con nombres o variantes diferentes en distintas regiones.",
+        how: "Se colocan varias piedritas en el suelo. El jugador lanza una al aire y, antes de atraparla, recoge una o más del suelo según la ronda. La dificultad aumenta a medida que avanzan las etapas.",
+        materials: "Cinco piedritas lisas de tamaño parecido o piezas blandas diseñadas para el juego.",
+        note: "Elegí piezas sin puntas y jugá sobre una superficie donde sea fácil verlas y recogerlas."
+      },
+      {
+        id: "barrilete", name: "El barrilete", category: "patio", label: "Juego al aire libre",
+        icon: "🪁", age: "Días con viento moderado",
+        short: "Una cometa liviana que vuela gracias al viento y a una cuerda que permite guiarla.",
+        description: "Volar barriletes es una actividad popular en muchas regiones. Se pueden fabricar con materiales livianos o usar modelos ya preparados.",
+        how: "Con viento moderado, se sostiene la cuerda y se deja que el barrilete tome aire. Se controla la cuerda con cuidado y se busca un espacio abierto para elevarlo.",
+        materials: "Un barrilete, hilo adecuado y un lugar amplio, alejado de calles y cables.",
+        note: "Nunca vueles barriletes cerca de cables eléctricos, tormentas, rutas o aeropuertos. Si hay tormenta, guardalo."
+      }
+    ];
+
+    const gamesGrid = document.getElementById("gamesGrid");
+    const searchInput = document.getElementById("searchInput");
+    const emptyState = document.getElementById("emptyState");
+    let currentFilter = "todos";
+
+    function renderGames() {
+      const query = searchInput.value.trim().toLocaleLowerCase("es");
+      const filtered = games.filter(game => {
+        const categoryMatch = currentFilter === "todos" || game.category === currentFilter;
+        const text = `${game.name} ${game.short} ${game.label} ${game.description}`.toLocaleLowerCase("es");
+        return categoryMatch && text.includes(query);
+      });
+      gamesGrid.innerHTML = filtered.map((game, index) => `
+        <article class="game-card">
+          <div class="card-art">
+            <span class="card-number">${String(games.indexOf(game) + 1).padStart(2, "0")} / 10</span>
+            <span class="game-icon" aria-hidden="true">${game.icon}</span>
+            <span class="category-tag">${game.category === "gaucho" ? "Juegos gauchos" : "Patio y calle"}</span>
+          </div>
+          <div class="card-body">
+            <h3>${game.name}</h3>
+            <p>${game.short}</p>
+            <div class="card-bottom">
+              <span class="card-meta">${game.label}</span>
+              <button class="details-btn" type="button" data-game="${game.id}">Conocer más ↗</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+      emptyState.style.display = filtered.length ? "none" : "block";
+    }
+
+    document.querySelectorAll(".filter").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        currentFilter = button.dataset.filter;
+        renderGames();
+      });
+    });
+    searchInput.addEventListener("input", renderGames);
+
+    const modal = document.getElementById("gameModal");
+    const closeModal = document.getElementById("closeModal");
+    function openGame(id) {
+      const game = games.find(item => item.id === id);
+      if (!game) return;
+      document.getElementById("modalCategory").textContent = game.label;
+      document.getElementById("modalTitle").textContent = game.name;
+      document.getElementById("modalIcon").textContent = game.icon;
+      document.getElementById("modalDescription").textContent = game.description;
+      document.getElementById("modalHow").textContent = game.how;
+      document.getElementById("modalMaterials").textContent = game.materials;
+      document.getElementById("modalNote").textContent = game.note;
+      modal.classList.add("open");
+      closeModal.focus();
+    }
+    gamesGrid.addEventListener("click", event => {
+      const button = event.target.closest("[data-game]");
+      if (button) openGame(button.dataset.game);
+    });
+    function hideModal() { modal.classList.remove("open"); }
+    closeModal.addEventListener("click", hideModal);
+    modal.addEventListener("click", event => { if (event.target === modal) hideModal(); });
+    document.addEventListener("keydown", event => { if (event.key === "Escape") hideModal(); });
+
+    const questions = [
+      {
+        q: "¿Qué juego tradicional se practica con cartas españolas?",
+        answers: ["La payana", "El truco", "La taba", "La sortija"],
+        correct: 1,
+        explain: "¡Exacto! En el truco, las cartas, las rondas y las apuestas cantadas forman parte de la estrategia."
+      },
+      {
+        q: "¿En qué juego se salta por casilleros dibujados en el piso?",
+        answers: ["El pato", "El balero", "La rayuela", "La pialada"],
+        correct: 2,
+        explain: "¡Muy bien! La rayuela suele dibujarse con tiza y se recorre saltando por turnos."
+      },
+      {
+        q: "¿Qué juego consiste en hacer volar una cometa?",
+        answers: ["El barrilete", "Las canicas", "La taba", "El truco"],
+        correct: 0,
+        explain: "¡Correcto! El barrilete aprovecha el viento y se guía con una cuerda."
+      },
+      {
+        q: "¿Cuál de estos es el deporte nacional argentino?",
+        answers: ["La rayuela", "La payana", "El pato", "El balero"],
+        correct: 2,
+        explain: "¡Así es! El pato es el deporte nacional argentino y se practica a caballo con reglas deportivas."
+      },
+      {
+        q: "¿Con qué se juega tradicionalmente a la payana?",
+        answers: ["Con piedritas pequeñas", "Con cartas españolas", "Con una cometa", "Con una sortija colgada"],
+        correct: 0,
+        explain: "¡Excelente! La payana trabaja la coordinación al lanzar y recoger piedritas siguiendo una secuencia."
+      }
+    ];
+
+    let questionIndex = 0;
+    let score = 0;
+    let hasAnswered = false;
+    const questionText = document.getElementById("questionText");
+    const answersEl = document.getElementById("answers");
+    const feedback = document.getElementById("feedback");
+    const nextBtn = document.getElementById("nextBtn");
+    const questionCounter = document.getElementById("questionCounter");
+    const scoreCounter = document.getElementById("scoreCounter");
+    const progressFill = document.getElementById("progressFill");
+    const answeredHint = document.getElementById("answeredHint");
+    const quizBox = document.getElementById("quizBox");
+
+    function renderQuestion() {
+      hasAnswered = false;
+      const question = questions[questionIndex];
+      questionCounter.textContent = `Pregunta ${questionIndex + 1} de ${questions.length}`;
+      scoreCounter.textContent = `Puntos: ${score}`;
+      progressFill.style.width = `${(questionIndex / questions.length) * 100}%`;
+      questionText.textContent = question.q;
+      feedback.textContent = "";
+      answeredHint.textContent = "Elegí una respuesta";
+      nextBtn.disabled = true;
+      nextBtn.textContent = questionIndex === questions.length - 1 ? "Ver resultado →" : "Siguiente →";
+      answersEl.innerHTML = "";
+      question.answers.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "answer";
+        button.textContent = `${String.fromCharCode(65 + index)}. ${answer}`;
+        button.addEventListener("click", () => chooseAnswer(index));
+        answersEl.appendChild(button);
+      });
+    }
+
+    function chooseAnswer(selected) {
+      if (hasAnswered) return;
+      hasAnswered = true;
+      const question = questions[questionIndex];
+      const buttons = [...answersEl.querySelectorAll("button")];
+      buttons.forEach(button => button.disabled = true);
+      buttons[question.correct].classList.add("correct");
+      if (selected === question.correct) {
+        score++;
+        feedback.textContent = question.explain;
+      } else {
+        buttons[selected].classList.add("wrong");
+        feedback.textContent = `Casi. ${question.explain}`;
+      }
+      scoreCounter.textContent = `Puntos: ${score}`;
+      answeredHint.textContent = "Respuesta registrada";
+      progressFill.style.width = `${((questionIndex + 1) / questions.length) * 100}%`;
+      nextBtn.disabled = false;
+    }
+
+    function showResult() {
+      const percent = Math.round(score / questions.length * 100);
+      let title, emoji, message;
+      if (score === 5) {
+        title = "¡Maestro de la tradición!"; emoji = "🏆";
+        message = "¡Puntaje perfecto! Se nota que conocés muy bien estos juegos.";
+      } else if (score >= 3) {
+        title = "¡Muy buen trabajo!"; emoji = "👏";
+        message = "Tenés una buena base. Volvé a recorrer las fichas para descubrir más detalles.";
+      } else {
+        title = "¡Buen comienzo!"; emoji = "🌱";
+        message = "Cada juego tiene su historia. Explorá las fichas y volvé a intentarlo cuando quieras.";
+      }
+      quizBox.innerHTML = `
+        <div class="result">
+          <div class="result-emoji" aria-hidden="true">${emoji}</div>
+          <div class="kicker">Tu resultado</div>
+          <h3>${title}</h3>
+          <p>Acertaste <strong>${score} de ${questions.length}</strong> preguntas (${percent}%).</p>
+          <p>${message}</p>
+          <button class="btn btn-blue" id="restartQuiz" type="button">Volver a jugar ↻</button>
+        </div>`;
+      document.getElementById("restartQuiz").addEventListener("click", () => {
+        questionIndex = 0;
+        score = 0;
+        quizBox.innerHTML = `
+          <div class="quiz-progress"><span id="questionCounter">Pregunta 1 de 5</span><span id="scoreCounter">Puntos: 0</span></div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <h3 id="questionText"></h3><div class="answers" id="answers"></div>
+          <p class="feedback" id="feedback" aria-live="polite"></p>
+          <div class="quiz-controls"><span id="answeredHint" class="card-meta">Elegí una respuesta</span><button class="btn btn-blue" id="nextBtn" type="button" disabled>Siguiente →</button></div>`;
+        // Reasignar referencias tras reconstruir el contenido.
+        window.location.hash = "#quiz";
+        window.location.reload();
+      });
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (!hasAnswered) return;
+      if (questionIndex < questions.length - 1) {
+        questionIndex++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    renderGames();
+    renderQuestion();
+  </script>
+</body>
+</html>
